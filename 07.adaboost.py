@@ -1,10 +1,16 @@
 import numpy as np
-
-
+from sklearn.datasets import load_iris
+# 这个是最基本的Adaboost 只能用于二分类
 def loadSimpData():
     dataMat = np.matrix([[1.,2.1],[2,1.1],[1.3,1.],[1.,1.],[2.,1.]])
     classLabel = np.mat([[1.0],[1.0],[-1.0],[-1.0],[1.0]])
     return dataMat,classLabel
+
+def load_data():
+    iris = load_iris()
+    X = iris.data
+    y = iris.target
+    return X, y
 
 # 构建单层决策树
 def stumpClassify(dataMatrix,dimen,threshVal,threshIneq):
@@ -85,7 +91,10 @@ def adaClassify(dataToClass,classifierArr):
     return np.sign(aggClassEst)
 
 if __name__ == '__main__':
-    dataMat,classLabel = loadSimpData()
+    # dataMat,classLabel = loadSimpData()
+    dataMat,classLabel = load_data()
+    print(np.shape(dataMat))
+    print(np.shape((np.mat(classLabel))))
     # print(dataMat)
     # print(classLabel)
     # ret = stumpClassify(dataMat,0,1.5,'lt')
